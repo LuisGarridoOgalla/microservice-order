@@ -2,19 +2,8 @@ package com.order.microservice.infraestructure.db.entity;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -39,14 +28,14 @@ public class OrderEntity {
   @Column(name = "amount", nullable = false)
   private String amount;
 
-  @OneToMany(fetch = FetchType.LAZY)
+  @ManyToOne
   @JoinColumn(name = "customerid")
   private CustomerEntity customerEntity;
 
-/*  @ManyToMany(cascade={CascadeType.ALL})
+  @ManyToMany(cascade={CascadeType.ALL})
   @JoinTable(name="order_product", joinColumns=@JoinColumn(name="orderid"),
       inverseJoinColumns=@JoinColumn(name="productid"))
-  List<ProductEntity> products;*/
+  List<ProductEntity> products;
 
 }
 
