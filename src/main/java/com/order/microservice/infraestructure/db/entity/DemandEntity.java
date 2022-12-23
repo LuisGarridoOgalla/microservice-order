@@ -27,9 +27,8 @@ public class DemandEntity {
   @Column(name = "amount", nullable = false)
   private String amount;
 
-  @ManyToOne
-  @JoinColumn(name = "customerid")
-  private CustomerEntity customerEntity;
+  @Column(name = "customerid", nullable = false)
+  private Long customerId;
 
   @ManyToMany(cascade={CascadeType.ALL})
   @JoinTable(name="order_product", joinColumns=@JoinColumn(name="orderid"),
