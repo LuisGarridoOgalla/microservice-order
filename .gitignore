@@ -42,3 +42,4 @@ target
 ### Docker ###
 **/.docker
 /code/docker/data/
+m2/*
