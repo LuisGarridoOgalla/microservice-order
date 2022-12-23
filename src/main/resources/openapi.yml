@@ -1,0 +1,149 @@
+openapi: 3.0.0
+info:
+  version: 0.1.0
+  title: API de Documentos
+  description: API for order.
+tags:
+- name: Order
+  description: order of client
+paths:
+  '/api/v1/oder/{orderId}':
+    get:
+      summary: get oders by orderId.
+      operationId: getOrder
+      tags:
+      - Order
+      parameters:
+      - $ref: '#/components/parameters/orderId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+
+    delete:
+      tags:
+      - Order
+      summary: deleteOrder
+      operationId: deleteOrder
+      parameters:
+      - $ref: '#/components/parameters/orderId'
+      responses:
+        '204':
+          description: order unregistered!
+    put:
+      tags:
+      - Order
+      summary: Update a order
+      operationId: updateOrder
+      parameters:
+      - $ref: '#/components/parameters/orderId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderCreate'
+        description: The card object
+        required: true
+      responses:
+        '200':
+          description: order edit!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+
+
+  '/api/v1/ordser':
+    post:
+      operationId: generateOrder
+      summary: create a order
+      tags:
+      - Order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderCreate'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+
+
+components:
+  schemas:
+    Order:
+      type: object
+      required:
+      - orderId
+      - amount
+      properties:
+        orderId:
+          type: integer
+          format: int64
+          example: 2
+        amount:
+          type: string
+    Product:
+      type: object
+      required:
+      - productId
+      - name
+      properties:
+        productId:
+          type: integer
+          format: int64
+          example: 2
+        name:
+          type: string
+    OrderCreate:
+      description: Tipo de contrato
+      type: object
+      required:
+      - contractTypeId
+      - documentTypeId
+      - name
+      properties:
+        customerId:
+          type: integer
+          format: int64
+          example: 2
+        documentTypeId:
+          type: integer
+          format: int64
+          example: 1
+        amount:
+          description:  of
+          type: string
+        product:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+  parameters:
+    pageNumber:
+      in: query
+      name: page
+      required: false
+      description: Número de página
+      schema:
+        type: integer
+        example: 2
+        default: 0
+    orderId:
+      in: path
+      name: orderId
+      description: order identification
+      required: true
+      schema:
+        type: integer
+        format: int64
+        example: 1

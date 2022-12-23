@@ -1,0 +1,14 @@
+version: "3.1"
+
+services:
+  sqlserver:
+    image: postgres
+    container_name: order
+    ports:
+    - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: free
+      POSTGRES_USER: free
+      POSTGRES_DB: order
+    volumes:
+      - ./data:/var/lib/postgresql/datata
