@@ -28,7 +28,7 @@ public class Order {
 
   private String amount;
 
-  private CustomerEntity customerEntity;
+  private Long customerId;
 
   private List<ProductEntity> products;
 }

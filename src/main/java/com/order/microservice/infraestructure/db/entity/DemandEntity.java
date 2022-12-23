@@ -7,18 +7,17 @@ import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Entity(name = "OrderEntity")
+@Entity(name = "DemandEntity")
 @Table(name = "demand")
 @ToString
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderEntity {
+public class DemandEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

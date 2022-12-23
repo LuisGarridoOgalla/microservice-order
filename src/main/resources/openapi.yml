@@ -4,17 +4,17 @@ info:
   title: API de Documentos
   description: API for order.
 tags:
-- name: Order
-  description: order of client
+  - name: Order
+    description: order of client
 paths:
   '/api/v1/oder/{orderId}':
     get:
       summary: get oders by orderId.
       operationId: getOrder
       tags:
-      - Order
+        - Order
       parameters:
-      - $ref: '#/components/parameters/orderId'
+        - $ref: '#/components/parameters/orderId'
       responses:
         '200':
           description: OK
@@ -27,21 +27,21 @@ paths:
 
     delete:
       tags:
-      - Order
+        - Order
       summary: deleteOrder
       operationId: deleteOrder
       parameters:
-      - $ref: '#/components/parameters/orderId'
+        - $ref: '#/components/parameters/orderId'
       responses:
         '204':
           description: order unregistered!
     put:
       tags:
-      - Order
+        - Order
       summary: Update a order
       operationId: updateOrder
       parameters:
-      - $ref: '#/components/parameters/orderId'
+        - $ref: '#/components/parameters/orderId'
       requestBody:
         content:
           application/json:
@@ -58,12 +58,12 @@ paths:
                 $ref: '#/components/schemas/Order'
 
 
-  '/api/v1/ordser':
+  '/api/v1/order':
     post:
       operationId: generateOrder
       summary: create a order
       tags:
-      - Order
+        - Order
       requestBody:
         content:
           application/json:
@@ -84,8 +84,8 @@ components:
     Order:
       type: object
       required:
-      - orderId
-      - amount
+        - orderId
+        - amount
       properties:
         orderId:
           type: integer
@@ -96,8 +96,8 @@ components:
     Product:
       type: object
       required:
-      - productId
-      - name
+        - productId
+        - name
       properties:
         productId:
           type: integer
@@ -109,35 +109,22 @@ components:
       description: Tipo de contrato
       type: object
       required:
-      - contractTypeId
-      - documentTypeId
-      - name
+        - customerId
+        - amount
+        - products
       properties:
         customerId:
           type: integer
           format: int64
           example: 2
-        documentTypeId:
-          type: integer
-          format: int64
-          example: 1
         amount:
           description:  of
           type: string
-        product:
+        products:
           type: array
           items:
             $ref: '#/components/schemas/Product'
   parameters:
-    pageNumber:
-      in: query
-      name: page
-      required: false
-      description: Número de página
-      schema:
-        type: integer
-        example: 2
-        default: 0
     orderId:
       in: path
       name: orderId
